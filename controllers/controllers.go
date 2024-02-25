@@ -8,6 +8,7 @@ import (
 
 	"github.com/gorilla/mux"
 
+	"github.com/br-jeff/go-api-http/database"
 	"github.com/br-jeff/go-api-http/models"
 )
 
@@ -16,7 +17,10 @@ func IndexController(w http.ResponseWriter, r *http.Request) {
 }
 
 func ListAllPeople(w http.ResponseWriter, r *http.Request) {
-	json.NewEncoder(w).Encode(models.People)
+	var p []models.Person
+
+	database.DB.Find(&p)
+	json.NewEncoder(w).Encode(p)
 }
 
 func FindPersonById(w http.ResponseWriter, r *http.Request) {
