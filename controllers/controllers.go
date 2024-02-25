@@ -31,3 +31,10 @@ func FindPersonById(w http.ResponseWriter, r *http.Request) {
 	database.DB.First(&person, id)
 	json.NewEncoder(w).Encode(person)
 }
+
+func CreatePerson(w http.ResponseWriter, r *http.Request) {
+	var person models.Person
+	json.NewDecoder(r.Body).Decode(&person)
+	database.DB.Create(&person)
+	json.NewEncoder(w).Encode(person)
+}
