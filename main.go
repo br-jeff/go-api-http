@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/br-jeff/go-api-http/database"
 	"github.com/br-jeff/go-api-http/models"
 	"github.com/br-jeff/go-api-http/routes"
 )
@@ -11,5 +12,6 @@ func main() {
 		{Id: 2, Name: "Lionel Messi", Document: "2134234"},
 	}
 
+	database.ConnectionDatabase()
 	routes.HandleRequest()
 }
