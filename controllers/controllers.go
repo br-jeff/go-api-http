@@ -4,7 +4,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
-	"strconv"
 
 	"github.com/gorilla/mux"
 
@@ -27,9 +26,8 @@ func FindPersonById(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	id := vars["id"]
 
-	for _, person := range models.People {
-		if strconv.Itoa(person.Id) == id {
-			json.NewEncoder(w).Encode(person)
-		}
-	}
+	var person models.Person
+
+	database.DB.First(&person, id)
+	json.NewEncoder(w).Encode(person)
 }
