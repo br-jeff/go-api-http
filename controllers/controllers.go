@@ -38,3 +38,11 @@ func CreatePerson(w http.ResponseWriter, r *http.Request) {
 	database.DB.Create(&person)
 	json.NewEncoder(w).Encode(person)
 }
+
+func DeletePerson(w http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+	id := vars["id"]
+	var person models.Person
+
+	database.DB.Delete(&person, id)
+}
